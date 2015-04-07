@@ -1,0 +1,7 @@
+---
+# defaults file for aspects_iptables
+aspects_iptables_enabled: False
+aspects_iptables_packages:
+  iptablespersistent:
+    state: "present"
+    Debian: "iptables-persistent"

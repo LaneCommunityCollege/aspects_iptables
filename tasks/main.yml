@@ -1,0 +1,11 @@
+---
+# tasks file for aspects_iptables
+- include: managePackages.yml
+  when: aspects_iptables_enabled
+  tags:
+  - aspects_iptables
+
+- include: iptables.yml
+  when: aspects_iptables_enabled
+  tags:
+  - aspects_iptables

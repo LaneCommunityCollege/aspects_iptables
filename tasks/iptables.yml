@@ -1,0 +1,30 @@
+---
+# Create and apply iptables rules
+- name: ensure /root/scripts exists
+  file: path=/root/scripts state=directory group=0 owner=0 mode=0755
+  tags:
+  - aspects_iptables
+
+- name: Debian - Template iptables v4 rules file.
+  when: ansible_os_family == "Debian"
+  template:
+    src: "iptablesv4rules.j2"
+    dest: "/etc/iptables/rules.v4"
+    mode: 0644
+    owner: 0
+    group: 0
+  notify: Debian restore iptables
+  tags:
+  - aspects_iptables
+
+- name: RedHat - Template iptables v4 rules file.
+  when: ansible_os_family == "RedHat"
+  template:
+    src: "iptablesv4rules.j2"
+    dest: "/etc/sysconfig/iptables"
+    mode: 0644
+    owner: 0
+    group: 0
+  notify: RedHat restore iptables
+  tags:
+  - aspects_iptables

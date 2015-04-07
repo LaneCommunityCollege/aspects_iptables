@@ -1,0 +1,6 @@
+---
+- name: Debian restore iptables
+  service: name=iptables-persistent state=restarted enabled=yes
+
+- name: RedHat restore iptables
+  service: name=iptables state=restarted enabled=yes
