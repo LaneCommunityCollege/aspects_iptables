@@ -1,6 +1,10 @@
 ---
 - name: Debian restore iptables
-  service: name=iptables-persistent state=restarted enabled=yes
+  shell: /etc/init.d/iptables-persistent stop ; /etc/init.d/iptables-persistent flush ; /etc/init.d/iptables-persistent start
+  tags:
+  - aspects_iptables
 
 - name: RedHat restore iptables
   service: name=iptables state=restarted enabled=yes
+  tags:
+    - aspects_iptables
