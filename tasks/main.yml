@@ -1,11 +1,18 @@
 ---
 # tasks file for aspects_iptables
 - include: managePackages.yml
-  when: aspects_iptables_enabled
+  when:
+    aspects_iptables_enabled
   tags:
   - aspects_iptables
 
 - include: iptables.yml
-  when: aspects_iptables_enabled
+  when: aspects_iptables_enabled and
+    ansible_distribution_version != "16.04"
+  tags:
+  - aspects_iptables
+
+- include: iptables1604.yml
+  when: aspects_iptables_enabled and ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"
   tags:
   - aspects_iptables

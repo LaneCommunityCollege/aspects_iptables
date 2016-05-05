@@ -1,0 +1,17 @@
+---
+# Create and apply iptables rules
+- name: ensure /root/scripts exists
+  file: path=/root/scripts state=directory group=0 owner=0 mode=0755
+  tags:
+  - aspects_iptables
+
+- name: Xenial - Template iptables v4 rules file.
+  template:
+    src: "iptablesv4rules.j2"
+    dest: "/etc/iptables/rules.v4"
+    mode: 0644
+    owner: 0
+    group: 0
+  notify: Xenial restore iptables
+  tags:
+  - aspects_iptables

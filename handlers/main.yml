@@ -8,3 +8,11 @@
   service: name=iptables state=restarted enabled=yes
   tags:
     - aspects_iptables
+
+# service netfilter-persistent
+# Usage: /etc/init.d/netfilter-persistent {start|restart|reload|force-reload|save|flush}
+
+- name: Xenial restore iptables
+  service: name=netfilter-persistent state=restarted enabled=yes
+  tags:
+    - aspects_iptables
