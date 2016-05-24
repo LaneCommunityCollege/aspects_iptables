@@ -13,6 +13,7 @@
 # Usage: /etc/init.d/netfilter-persistent {start|restart|reload|force-reload|save|flush}
 
 - name: Xenial restore iptables
-  service: name=netfilter-persistent state=restarted enabled=yes
+  shell: /etc/init.d/netfilter-persistent stop ; /etc/init.d/netfilter-persistent flush ; /etc/init.d/netfilter-persistent start
+#  service: name=netfilter-persistent state=restarted enabled=yes
   tags:
     - aspects_iptables

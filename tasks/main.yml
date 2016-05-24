@@ -7,8 +7,7 @@
   - aspects_iptables
 
 - include: iptables.yml
-  when: aspects_iptables_enabled and
-    ansible_distribution_version != "16.04"
+  when: aspects_iptables_enabled and ansible_distribution_version != "16.04"
   tags:
   - aspects_iptables
 
