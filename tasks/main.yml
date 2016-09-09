@@ -5,6 +5,7 @@
     aspects_iptables_enabled
   tags:
   - aspects_iptables
+  - aspects_iptables_package_install
 
 - include: iptables.yml
   when: aspects_iptables_enabled and ansible_distribution_version != "16.04"
@@ -12,6 +13,8 @@
   - aspects_iptables
 
 - include: iptables1604.yml
-  when: aspects_iptables_enabled and ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04"
+  when: aspects_iptables_enabled and
+        ansible_distribution == "Ubuntu" and
+        ansible_distribution_version == "16.04"
   tags:
   - aspects_iptables
