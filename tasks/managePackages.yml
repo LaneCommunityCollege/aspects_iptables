@@ -11,7 +11,7 @@
     - aspects_iptables
     - aspects_iptables_package_install
 
-- name: Debian - Install apache24 packages with apt
+- name: Debian - Install iptables packages with apt
   when:
     (ansible_os_family == "Debian" or ansible_os_family == "Linuxmint") and
     item.value.state != 'default' and
@@ -27,7 +27,7 @@
     - aspects_iptables
     - aspects_iptables_package_install
 
-- name: RedHat - Install apache24 packages with yum
+- name: RedHat - Install iptables packages with yum
   when:
     ansible_os_family == "RedHat" and
     item.value.state != 'default' and
@@ -41,7 +41,7 @@
     - aspects_iptables
     - aspects_iptables_package_install
 
-- name: Suse - Install apache24 packages with Zypper
+- name: Suse - Install iptables packages with Zypper
   when:
     ansible_os_family == "Suse" and
     item.value.state != 'default' and
