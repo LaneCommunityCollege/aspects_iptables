@@ -3,6 +3,8 @@ aspects_iptables
 
 Manage iptables using CentOS's built in service and Debian/Ubuntu's iptables-persistent package.
 
+**Warning**: Removes firewalld on CentOS 7 so that the iptables-service package can be used.
+
 Requirements
 ------------
 
@@ -16,7 +18,7 @@ Boolean
 Run task or not. Default is not.
 
 ### aspects_iptables_packages:
-  
+
     aspects_iptables_packages:
       iptablespersistent:
         state: "present"
@@ -24,16 +26,9 @@ Run task or not. Default is not.
 
 Install iptables-persistent on Ubuntu/Debian.
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
+```yaml
     - hosts: servers
       roles:
          - { role: aspects_iptables, x: 42 }
@@ -73,6 +68,7 @@ Including an example of how to use your role (for instance, with variables passe
               -A INPUT -p udp -m udp --dport 161 -j ACCEPT
               -A INPUT -p tcp -m tcp --dport 162 -j ACCEPT
               -A INPUT -p udp -m udp --dport 162 -j ACCEPT
+```
 
 License
 -------
