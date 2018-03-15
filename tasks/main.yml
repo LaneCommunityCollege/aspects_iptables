@@ -15,9 +15,6 @@
               ansible_distribution_version == "16.04"
             ) or (
               ansible_distribution == "Debian" and
-              ansible_distribution_release == "jessie"
-            ) or (
-              ansible_distribution == "Debian" and
               ansible_distribution_release == "stretch"
             )
           )
@@ -31,9 +28,6 @@
           (
             ansible_distribution == "Ubuntu" and
             ansible_distribution_version == "16.04"
-          ) or (
-            ansible_distribution == "Debian" and
-            ansible_distribution_release == "jessie"
           ) or (
             ansible_distribution == "Debian" and
             ansible_distribution_release == "stretch"
