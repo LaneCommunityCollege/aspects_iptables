@@ -35,3 +35,10 @@
         )
   tags:
   - aspects_iptables
+
+- name: Disable and purge the packages and configuration installed by this role.
+  when: aspects_iptables_disable_and_purge and not aspects_iptables_enabled
+  import_tasks: disableAndPurge.yml
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge

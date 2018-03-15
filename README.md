@@ -26,6 +26,13 @@ Run task or not. Default is not.
 
 Install iptables-persistent on Ubuntu/Debian.
 
+### aspects_iptables_disable_and_purge
+Default: False
+
+When set to `True` along with setting `aspects_iptables_enabled` to `False`, the tasks in [tasks/disableAndPurge.yml](tasks/disableAndPurge.yml) will be run. That will disable the services, and purge the packages from the OS.
+
+It will NOT clear or flush and iptable rules already in place.
+
 Example Playbook
 ----------------
 ```yaml

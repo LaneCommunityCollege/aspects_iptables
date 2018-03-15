@@ -1,0 +1,119 @@
+---
+- name: Ubuntu 14.04 disable iptables-persistent
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "14.04"
+    )
+  service:
+    name: "iptables-persistent"
+    state: "stopped"
+    enabled: "no"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: Ubuntu 16.04 disable netfilter-persistent
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "16.04"
+    )
+  service:
+    name: "netfilter-persistent"
+    state: "stopped"
+    enabled: "no"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: Debian 9 disable netfilter-persistent
+  when:
+    (
+      ansible_distribution == "Debian" and
+      ansible_distribution_major_version == "9"
+    )
+  service:
+    name: "netfilter-persistent"
+    state: "stopped"
+    enabled: "no"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: RedHat disable iptables
+  when:
+    (
+      ansible_distribution == "CentOS" and
+      ansible_distribution_version == "7"
+    )
+  service:
+    name: iptables
+    state: stopped
+    enabled: no
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: Ubuntu 14.04 - Purge iptables packages with apt
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "14.04"
+    )
+  apt:
+    pkg: "iptables-persistent"
+    state: "absent"
+    purge: "yes"
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: Ubuntu 16.04 - Purge iptables packages with apt
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "16.04"
+    )
+  apt:
+    pkg: "{{ item }}"
+    state: "absent"
+    purge: "yes"
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  with_items:
+  - "netfilter-persistent"
+  - "iptables-persistent"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: Debian 9 - Purge iptables packages with apt
+  when:
+    (
+      ansible_distribution == "Debian" and
+      ansible_distribution_major_version == "9"
+    )
+  apt:
+    pkg: "{{ item }}"
+    state: "absent"
+    purge: "yes"
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  with_items:
+  - "netfilter-persistent"
+  - "iptables-persistent"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge
+
+- name: CentOS 7 - Remove iptables-services
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+  yum:
+    name: "iptables-services"
+    state: "absent"
+  tags:
+    - aspects_iptables
+    - aspects_iptables_disable_and_purge

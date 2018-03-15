@@ -5,3 +5,4 @@ aspects_iptables_packages:
   iptablespersistent:
     state: "present"
     Debian: "iptables-persistent"
+aspects_iptables_disable_and_purge: False
