@@ -8,14 +8,18 @@
   - aspects_iptables_package_install
 
 - include: iptables.yml
-  when: aspects_iptables_enabled and
-        not (
-          (
-            ansible_distribution == "Ubuntu" and
-            ansible_distribution_version == "16.04"
-          ) or (
-            ansible_distribution == "Debian" and
-            ansible_distribution_release == "jessie"
+  when: ( aspects_iptables_enabled and
+          not (
+            (
+              ansible_distribution == "Ubuntu" and
+              ansible_distribution_version == "16.04"
+            ) or (
+              ansible_distribution == "Debian" and
+              ansible_distribution_release == "jessie"
+            ) or (
+              ansible_distribution == "Debian" and
+              ansible_distribution_release == "stretch"
+            )
           )
         )
   tags:
@@ -30,6 +34,9 @@
           ) or (
             ansible_distribution == "Debian" and
             ansible_distribution_release == "jessie"
+          ) or (
+            ansible_distribution == "Debian" and
+            ansible_distribution_release == "stretch"
           )
         )
   tags:
