@@ -1,5 +1,4 @@
 ---
-# Install Apache Packages.
 - name: Debian - Install python-apt for use with ansible apt modules.
   when: ansible_os_family == "Debian" or ansible_os_family == "Linuxmint"
   apt:
@@ -35,20 +34,6 @@
     item.value.RedHat is defined
   yum:
     name: "{{ item.value.RedHat }}"
-    state: "{{ item.value.state }}"
-  with_dict: "{{ aspects_iptables_packages }}"
-  tags:
-    - aspects_iptables
-    - aspects_iptables_package_install
-
-- name: Suse - Install iptables packages with Zypper
-  when:
-    ansible_os_family == "Suse" and
-    item.value.state != 'default' and
-    item.value.state != 'purged' and
-    item.value.Suse is defined
-  zypper:
-    name: "{{ item.value.Suse }}"
     state: "{{ item.value.state }}"
   with_dict: "{{ aspects_iptables_packages }}"
   tags:
