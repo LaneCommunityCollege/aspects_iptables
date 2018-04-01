@@ -1,10 +1,6 @@
 # {{ ansible_managed }}
-*filter
 {% for rule in aspects_iptables_v4_rules|sort %}
 {% if aspects_iptables_v4_rules[rule].enabled %}
 {{ aspects_iptables_v4_rules[rule].rule }}
 {% endif %}
 {% endfor %}
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
