@@ -1,44 +1,6 @@
 ---
-# tasks file for aspects_iptables
-- include: managePackages.yml
-  when:
-    aspects_iptables_enabled
+- name: import tasks when role is enabled
+  when: aspects_iptables_enabled
+  import_tasks: init.yml
   tags:
   - aspects_iptables
-  - aspects_iptables_package_install
-
-- include: iptables.yml
-  when: ( aspects_iptables_enabled and
-          not (
-            (
-              ansible_distribution == "Ubuntu" and
-              ansible_distribution_version == "16.04"
-            ) or (
-              ansible_distribution == "Debian" and
-              ansible_distribution_release == "stretch"
-            )
-          )
-        )
-  tags:
-  - aspects_iptables
-
-- include: iptables1604.yml
-  when: aspects_iptables_enabled and
-        (
-          (
-            ansible_distribution == "Ubuntu" and
-            ansible_distribution_version == "16.04"
-          ) or (
-            ansible_distribution == "Debian" and
-            ansible_distribution_release == "stretch"
-          )
-        )
-  tags:
-  - aspects_iptables
-
-- name: Disable and purge the packages and configuration installed by this role.
-  when: aspects_iptables_disable_and_purge and not aspects_iptables_enabled
-  import_tasks: disableAndPurge.yml
-  tags:
-    - aspects_iptables
-    - aspects_iptables_disable_and_purge

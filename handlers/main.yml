@@ -5,15 +5,14 @@
   - aspects_iptables
 
 - name: RedHat restore iptables
-  service: name=iptables state=restarted enabled=yes
+  service:
+    name: "iptables"
+    state: "restarted"
+    enabled: "yes"
   tags:
     - aspects_iptables
 
-# service netfilter-persistent
-# Usage: /etc/init.d/netfilter-persistent {start|restart|reload|force-reload|save|flush}
-
 - name: Xenial restore iptables
-#  shell: /etc/init.d/netfilter-persistent stop ; /etc/init.d/netfilter-persistent flush ; /etc/init.d/netfilter-persistent start
   service:
     name: "netfilter-persistent"
     state: "restarted"

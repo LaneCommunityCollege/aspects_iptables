@@ -5,4 +5,8 @@ aspects_iptables_packages:
   iptablespersistent:
     state: "present"
     Debian: "iptables-persistent"
+    RedHat: "iptables-services"
+  firewalld:
+    state: "absent"
+    RedHat: "firewalld"
 aspects_iptables_disable_and_purge: False

@@ -23,8 +23,11 @@ Run task or not. Default is not.
       iptablespersistent:
         state: "present"
         Debian: "iptables-persistent"
+      firewalld:
+        state: "absent"
+        RedHat: "firewalld"
 
-Install iptables-persistent on Ubuntu/Debian.
+Install iptables-persistent on Ubuntu/Debian. Remove firewalld on CentOS.
 
 ### aspects_iptables_disable_and_purge
 Default: False
@@ -42,9 +45,10 @@ Example Playbook
       vars:
         aspects_iptables_enabled: True
         aspects_iptables_v4_rules:
-          0defaultpolicy:
+          00000defaultpolicy:
             enabled: true
             rule: |
+              *filter
               :INPUT DROP [0:0]
               :FORWARD DROP [0:0]
               :OUTPUT ACCEPT [0:0]
@@ -75,6 +79,12 @@ Example Playbook
               -A INPUT -p udp -m udp --dport 161 -j ACCEPT
               -A INPUT -p tcp -m tcp --dport 162 -j ACCEPT
               -A INPUT -p udp -m udp --dport 162 -j ACCEPT
+          zzend:
+            enabled: True
+            rule: |
+              -A INPUT -j REJECT --reject-with icmp-host-prohibited
+              -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+              COMMIT
 ```
 
 License

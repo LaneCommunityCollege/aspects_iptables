@@ -48,12 +48,3 @@
   tags:
     - aspects_iptables
     - aspects_iptables_package_install
-
-- name: CentOS 7 - Install iptables-services so we can use /etc/sysconfig/iptables to set rules
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
-  yum:
-    name: "iptables-services"
-    state: "present"
-  tags:
-    - aspects_iptables
-    - aspects_iptables_package_install
