@@ -1,10 +1,10 @@
 ---
-- import_tasks: managePackages.yml
+- include_tasks: managePackages.yml
   tags:
   - aspects_iptables
   - aspects_iptables_package_install
 
-- import_tasks: iptables.yml
+- include_tasks: iptables.yml
   when: ( aspects_iptables_enabled and
           not (
             (
@@ -23,7 +23,7 @@
   - aspects_iptables
 
 - name: "Import Xenial, Bionic, and Stretch tasks."
-  import_tasks: iptables1604.yml
+  include_tasks: iptables1604.yml
   when: aspects_iptables_enabled and
         (
           (
@@ -42,7 +42,7 @@
 
 - name: Disable and purge the packages and configuration installed by this role.
   when: aspects_iptables_disable_and_purge and not aspects_iptables_enabled
-  import_tasks: disableAndPurge.yml
+  include_tasks: disableAndPurge.yml
   tags:
     - aspects_iptables
     - aspects_iptables_disable_and_purge

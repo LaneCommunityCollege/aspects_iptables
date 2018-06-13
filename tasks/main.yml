@@ -1,6 +1,6 @@
 ---
 - name: import tasks when role is enabled
   when: aspects_iptables_enabled
-  import_tasks: init.yml
+  include_tasks: init.yml
   tags:
   - aspects_iptables
